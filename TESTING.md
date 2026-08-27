@@ -186,6 +186,7 @@ report, slide deck, or email.
 This is an early beta — a few things you'll notice are missing:
 
 - No in-app help — this document is it, for now
+- File menu isn't wired up yet for save; CMD-S doesn't save.  The toolbar buttons do save/save as
 - Windows isn't available yet (macOS Apple Silicon only)
 - No fifth artifact type (an A3 report format is being considered)
 
