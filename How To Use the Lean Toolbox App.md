@@ -4,7 +4,7 @@ Thanks for trying out **Lean Practitioner's Toolbox**! This is a short guide
 to get you from "just downloaded it" to building your first artifact. It
 covers the basics — enough to explore the app and give useful feedback.
 
-Current version: **v2.0.1 (beta)** · macOS on Apple Silicon only (Windows
+Current version: **v2.1.0 (beta)** · macOS on Apple Silicon only (Windows
 build planned, not yet available).
 
 ---
@@ -62,6 +62,18 @@ Two words you'll see throughout the app:
 | Undo / Redo | Step backward/forward — acts on whichever artifact tab you're currently viewing |
 | ⚙ Settings | Theme, font, and color preferences |
 
+**Keyboard shortcuts:**
+
+| Shortcut | Action |
+|---|---|
+| ⌘N / ⌘O | New project / Open |
+| ⌘S / ⇧⌘S | Save / Save As |
+| ⌘Z / ⇧⌘Z | Undo / Redo (undoes your typing while you're in a field, otherwise the last diagram change) |
+| ⌘W | Close window (the app stays in the Dock) |
+| ⌘Q | Quit |
+
+You can also open a `.lean` file by double-clicking it in Finder.
+
 **Adding an artifact:** click the **+** button in the tab bar, pick a type
 (SIPOC, Fishbone, XYM, or VSM), and give it a name. It appears as a new
 tab.
@@ -79,7 +91,7 @@ type, and the diagram updates immediately. A few artifacts also let you
 interact with the canvas directly (noted below) — but the sidebar is
 always the source of truth.
 
-Click **Save** often — there's no autosave.
+Save often (⌘S) — there's no autosave.
 
 ---
 
@@ -109,6 +121,8 @@ specific "sub-causes."*
 
 1. Click the diagram head (or the tree item at the top of the sidebar) to
    set your **Problem Statement**, owner, and date opened.
+   The Problem Statement holds up to 125 characters; a counter below it
+   shows how many you've used.
 2. Click **+ Cause** to add a major cause — it appears as a "fin" on the
    diagram.
 3. Select a cause to add up to 6 **sub-causes**, and to set its owner,
@@ -131,7 +145,8 @@ each relationship.*
 
 1. Add your customer-critical **outputs** in the sidebar, and rate each
    one's **importance** (1–10).
-2. Add your process **inputs**.
+2. Add your process **inputs**. Labels hold up to 50 characters; a
+   counter appears while you edit.
 3. On the canvas, click into any cell in the grid and score the
    relationship between that input and output (0–10) — directly on the
    canvas, not the sidebar, since a scoring grid works better as a grid.
@@ -186,7 +201,6 @@ report, slide deck, or email.
 This is an early beta — a few things you'll notice are missing:
 
 - No in-app help — this document is it, for now
-- File menu isn't wired up yet for save; CMD-S doesn't save.  The toolbar buttons do save/save as
 - Windows isn't available yet (macOS Apple Silicon only)
 - No fifth artifact type (an A3 report format is being considered)
 
