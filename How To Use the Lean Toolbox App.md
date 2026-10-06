@@ -4,7 +4,7 @@ Thanks for trying out **Lean Practitioner's Toolbox**! This is a short guide
 to get you from "just downloaded it" to building your first artifact. It
 covers the basics — enough to explore the app and give useful feedback.
 
-Current version: **v2.1.0 (beta)** · macOS on Apple Silicon only (Windows
+Current version: **v2.2.0 (beta)** · macOS on Apple Silicon only (Windows
 build planned, not yet available).
 
 ---
@@ -16,12 +16,14 @@ artifacts without any flowcharting or drawing skills. You type structured
 information into a sidebar on the left, and the app draws the diagram for
 you on a canvas on the right — live, as you type.
 
-Four artifact types are supported today:
+Five artifact types are supported today:
 
 - **SIPOC** — a high-level process map
 - **Fishbone (Ishikawa)** — a root-cause / cause-and-effect diagram
 - **X-Y Matrix** — a prioritization matrix
 - **Value Stream Map (VSM)** — a process-flow map with timing
+- **Kaizen Tracker** — track the improvement actions your team takes
+  against Fishbone causes
 
 You don't need to be a Six Sigma practitioner to test the app — if you've
 never used these tools before, the short explanation under each one below
@@ -64,28 +66,32 @@ Two words you'll see throughout the app:
 
 **Keyboard shortcuts:**
 
-| Shortcut | Action |
-|---|---|
-| ⌘N / ⌘O | New project / Open |
-| ⌘S / ⇧⌘S | Save / Save As |
-| ⌘Z / ⇧⌘Z | Undo / Redo (undoes your typing while you're in a field, otherwise the last diagram change) |
-| ⌘W | Close window (the app stays in the Dock) |
-| ⌘Q | Quit |
+| Shortcut | Keys | Action |
+|---|---|---|
+| ⌘N / ⌘O | Command+N / Command+O | New project / Open |
+| ⌘S / ⇧⌘S | Command+S / Shift+Command+S | Save / Save As |
+| ⌘Z / ⇧⌘Z | Command+Z / Shift+Command+Z | Undo / Redo (undoes your typing while you're in a field, otherwise the last diagram change) |
+| ⌘W | Command+W | Close window (the app stays in the Dock) |
+| ⌘Q | Command+Q | Quit |
+
+*Symbol key: ⌘ Command · ⇧ Shift · ⌥ Option · ⌃ Control*
 
 You can also open a `.lean` file by double-clicking it in Finder.
 
 **Adding an artifact:** click the **+** button in the tab bar, pick a type
-(SIPOC, Fishbone, XYM, or VSM), and give it a name. It appears as a new
+(SIPOC, Fishbone, XYM, VSM, or Kaizen Tracker), and give it a name. It appears as a new
 tab.
 
 Each tab has its own independent undo/redo history, and its own data —
-editing one artifact never affects another.
+editing one artifact never affects another. The one deliberate exception
+is the Kaizen Tracker, which links to a Fishbone: its actions drive the
+status of the causes they're linked to (see *Kaizen Tracker* below).
 
 ---
 
 ## How editing works
 
-The general pattern is the same across all four artifacts: **the sidebar
+The general pattern is the same across every artifact: **the sidebar
 is where you type, the canvas is what you look at.** Click into a field,
 type, and the diagram updates immediately. A few artifacts also let you
 interact with the canvas directly (noted below) — but the sidebar is
@@ -133,6 +139,15 @@ specific "sub-causes."*
 Status colors (not started / in progress / blocked / complete) and
 priority badges (P1–P5) show directly on the diagram.
 
+- **No action needed:** tick this on a cause or sub-cause when it has been
+  investigated and ruled out, and record why in Comments.
+- **Delete:** use the button at the bottom of a cause or sub-cause panel,
+  or the ✕ in the structure view. You'll be asked to confirm if Kaizen
+  actions are linked to it.
+- **Status:** once a cause has Kaizen actions, its status is calculated
+  from them and can't be set by hand; a note explains what's still open.
+  The full rules are in the *Kaizen Tracker* section.
+
 ---
 
 ## X-Y Matrix
@@ -177,14 +192,87 @@ you edit.
 
 ---
 
+## Kaizen Tracker
+
+*A Fishbone shows what's causing a problem. The Kaizen Tracker tracks
+what your team is doing about it: the improvement actions taken against
+each cause, who owns them, when they're due, and whether they're done.*
+
+**In the app:**
+
+1. Add a Kaizen Tracker to a project that already has a Fishbone.
+2. Click **+ Add Action**. First choose what the action addresses in
+   **Linked To** — a cause, or one of its sub-causes — then describe the
+   action. *If one action addresses several sub-causes, link it to their
+   parent cause.*
+3. Fill in the owner, due date, and status. When you set an action to
+   **Complete**, today's date is filled in as the completed date (you can
+   change it).
+4. The table on the right groups actions by Fishbone and cause, in the
+   same order as the diagram. Click any row to open that action.
+
+**Reading the summary:** the top row shows **Total Actions** and how they
+break down by status. The two cards on the right need attention:
+
+- **Overdue** (red) — actions past their due date that aren't complete.
+- **Gaps** (amber) — causes or sub-causes with no actions yet. They're
+  listed under the table as *Causes without actions*.
+
+Both cards turn grey at zero.
+
+### How status works
+
+Once a cause or sub-cause has actions, **its status is calculated from
+them** and can no longer be set by hand on the Fishbone. A note on the
+Fishbone explains what's still open — for example, *"Not complete: 1
+sub-cause has no actions."*
+
+| If the actions underneath are… | The cause or sub-cause shows |
+|---|---|
+| Any Blocked | **Blocked** |
+| Any In Progress | **In Progress** |
+| A mix of Not Started and Complete | **In Progress** |
+| All Not Started | **Not Started** |
+| All Complete | **Complete** |
+
+- A cause is only **Complete** when its own actions are complete **and**
+  every sub-cause is either complete or marked **No action needed**.
+- A sub-cause with no actions holds its cause back. Add an action, or
+  tick **No action needed** on the Fishbone (and record why in Comments).
+- Causes with no actions keep the status you set by hand, as before.
+
+### How dates work
+
+- Each cause, sub-cause, and action keeps its own due date. The app never
+  changes one because of another.
+- A cause's **effective date** is the latest due date of anything still
+  open underneath it. Once everything is complete, it shows the latest
+  completed date instead.
+- **Warnings, never blocks:** an action due after its sub-cause's or
+  cause's date, an action with no due date, and an overdue action are all
+  flagged — but allowed.
+- A **completed date can't be in the future**; the app won't accept one.
+
+**If a cause is deleted:** its actions are kept and flagged **Cause
+removed** (under *Unlinked*) so you can relink them. You'll be asked to
+confirm before deleting a cause that has actions, and Undo brings the
+cause — and its links — back.
+
+---
+
 ## Settings
 
 Click the **⚙ Settings** button in the toolbar to adjust:
 
 - Light/dark theme
 - Font family and size
-- Canvas background color
-- Status colors (used on Fishbone causes)
+- Canvas background color — in dark mode the canvas switches to a soft
+  grey unless you've picked your own color
+- Status colors (used on Fishbone causes and in the Kaizen Tracker)
+
+**Reset colors to defaults** puts the canvas background and status
+colors back to their original settings. Like any change in Settings, it
+takes effect when you click Save; Cancel undoes it.
 
 ---
 
@@ -202,7 +290,9 @@ This is an early beta — a few things you'll notice are missing:
 
 - No in-app help — this document is it, for now
 - Windows isn't available yet (macOS Apple Silicon only)
-- No fifth artifact type (an A3 report format is being considered)
+- No A3 report artifact yet (it's being considered)
+- No CSV/BI export yet (the Kaizen Tracker data is designed for it —
+  coming in a future release)
 
 ---
 
