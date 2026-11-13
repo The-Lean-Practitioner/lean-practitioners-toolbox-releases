@@ -4,7 +4,7 @@ Thanks for trying out **Lean Practitioner's Toolbox**! This is a short guide
 to get you from "just downloaded it" to building your first artifact. It
 covers the basics — enough to explore the app and give useful feedback.
 
-Current version: **v2.2.0 (beta)** · macOS on Apple Silicon only (Windows
+Current version: **v2.2.1 (beta)** · macOS on Apple Silicon only (Windows
 build planned, not yet available).
 
 ---
